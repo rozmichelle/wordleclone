@@ -23,7 +23,16 @@ export const getShareableData = (currentGuesses, solution) => {
 		var currentGuess = currentGuesses[w]
 		var datarow = [];
 		for (var l = 0; l < currentGuess.length; l++) {
-			var status = getStatus(l, currentGuess[l])
+			var status = getCellStatus(solution, l, currentGuess[l])
+			
+			if (status === 2) {
+				status = '🟩' // in correct place in word
+			} else if (status === 1) {
+				status = '🟨' // in word but in wrong place
+			} else { // 0
+				status = '⬛' // not in word
+			}
+			
 			datarow.push(status)
 		}
 		
@@ -31,15 +40,14 @@ export const getShareableData = (currentGuesses, solution) => {
 	}
 	
 	return data
-	
-	function getStatus(col, letter) {
-		
-		if (letter === solution[col]) {
-			return '🟩' // in correct place in word
-		} else if (solution.indexOf(letter) > -1) {
-			return '🟨' // 1 // in word but in wrong place
-		} else {
-			return '⬛' //0 // not in word
-		}
+}
+
+export const getCellStatus = (solution, col, letter) => {
+	if (letter === solution[col]) {
+		return 2 // in correct place in word
+	} else if (solution.indexOf(letter) > -1) {
+		return 1 // in word but in wrong place
+	} else {
+		return 0 // not in word
 	}
 }

@@ -6,18 +6,6 @@ const ShareableData = ({ guesses, solutionHash, nrows }) => {
 	const [resultsCopied, updatedResultsCopied] = useState(false)
 	
 	let dataRows = getShareableData(guesses, decodeSolution(solutionHash))
-   	
-	const getClass = (status) => {
-		if (status === 0) {
-			return '⬛'
-		} else if (status === 1) {
-			return '🟨'
-		} else if (status === 2) {
-			return '🟩'
-		} else {
-			return '0'
-		}
-	}
 
 	const copyData = (dataRows) => {
 		let str = 'Wordle ' + solutionHash + ' ' + dataRows.length + '/' + nrows + '\n'
@@ -34,7 +22,7 @@ const ShareableData = ({ guesses, solutionHash, nrows }) => {
 	}
 
 	return <Fragment>
-		<button className='bigbutton bg_secondary' onClick={() => copyData(dataRows)}>{resultsCopied ? ('Copied!') : ('Copy Results')}</button>
+		<button className='bigbutton bg_secondary' onClick={() => copyData(dataRows)}>{resultsCopied ? ('Results Copied') : ('Copy Results')}</button>
 	</Fragment>
 }
 

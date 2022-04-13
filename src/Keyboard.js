@@ -10,7 +10,6 @@ const Keyboard = ({ currentGuesses, winningHash, guessedLetters, buttonClicked }
 	
 	const getLetterColor = (letter) => {
 		letter = letter.toLowerCase()
-		
 		let letterInGuessedList = guessedLetters.has(letter)
 		// only change key style if it has been guessed
 		if (!letterInGuessedList) return 'key-default'
@@ -39,7 +38,7 @@ const Keyboard = ({ currentGuesses, winningHash, guessedLetters, buttonClicked }
 		} else if (!letterInWord) {
 			return 'key-fail';
 		} else {
-			return 'key-default'; // shouldn't happen here
+			return 'key-default'; // shouldn't ever happen
 		}
 	}
 	
