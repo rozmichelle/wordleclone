@@ -329,6 +329,7 @@ const Game = () => {
 			navigate('/wordle/' + winningHash)
 		}
 		
+		// uncomment the following to print solution to console
 		// winningHash !== null && console.log("Solution: " + decodeSolution(winningHash))
 		
     }, [getUrlParam, gameLoaded, getInitialState, ncols, navigate, winningState, winningHash]);
