@@ -7,6 +7,7 @@ import {dictionaries, isWord} from './utils/dictionary'
 import {encodeSolution, decodeSolution} from './utils/helpers'
 import Row from "./Row"
 import Keyboard from "./Keyboard"
+import ShareableData from "./ShareableData"
 
 const Game = () => {
 	let navigate = useNavigate()
@@ -87,7 +88,7 @@ const Game = () => {
 	}, [params.wordID])
 
 	const genRows = () => {
-        function getRow(rowArr, rowIdx){
+		function getRow(rowArr, rowIdx) {
 			return <Row key = { rowIdx }
 					   letters = { rowArr }
 					   solutionHash = { winningHash }
@@ -157,7 +158,7 @@ const Game = () => {
 			}
 		}
 		
-		const showWinAlert = (currentRow, nrows) => {
+		const showWinAlert = (currentRow, nrows, newGrid) => {
 			updateGameOverMessage('You found the word in ' + (currentRow + 1) + ' of ' + nrows + ' moves')
 
 			let element = document.getElementById('winner');
@@ -215,7 +216,10 @@ const Game = () => {
 
 							if (checkWord(currentWord)) {
 								newWinningState = 2
-								showWinAlert(currentRow, nrows)
+								showWinAlert(currentRow, nrows, newGrid)
+								// passed in new grid since it isn't updated until bottom 
+								// of this function but need updated submitted guesses
+								// to print shareable boxes
 
 							} else if (newRow === newGrid.length - 1) {
 								// if last row, game over
@@ -359,6 +363,9 @@ const Game = () => {
 				<div id='winner'>
 					<div className='neon-green'>Nice job!</div>
 					<p><strong>{ gameOverMessage }</strong></p>
+					{ <ShareableData guesses = {grid.slice(0, currentRow)} 
+						  			 solutionHash = {winningHash} 
+						  			 nrows={nrows} /> }
 					{ getPlayAgainData('winner') }
 				</div>
 				

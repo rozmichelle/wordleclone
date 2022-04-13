@@ -5,13 +5,41 @@ var Buffer = require('buffer/').Buffer
 const hashids = new Hashids("Wordle for the WIN!")
 
 export const encodeSolution = (word) => {
-	let hex = Buffer.from(word, 'utf8').toString('hex');
-	let hash = hashids.encodeHex(hex);
+	let hex = Buffer.from(word, 'utf8').toString('hex')
+	let hash = hashids.encodeHex(hex)
 	return hash
 }
 	
 export const decodeSolution = (hash) => {
-	var decodedHex = hashids.decodeHex(hash);
-	var word = Buffer.from(decodedHex, 'hex').toString('utf8');
+	var decodedHex = hashids.decodeHex(hash)
+	var word = Buffer.from(decodedHex, 'hex').toString('utf8')
 	return word
+}
+
+// assumed solution is decoded
+export const getShareableData = (currentGuesses, solution) => {
+	var data = [];
+	for (var w = 0; w < currentGuesses.length; w++) {
+		var currentGuess = currentGuesses[w]
+		var datarow = [];
+		for (var l = 0; l < currentGuess.length; l++) {
+			var status = getStatus(l, currentGuess[l])
+			datarow.push(status)
+		}
+		
+		data.push(datarow)
+	}
+	
+	return data
+	
+	function getStatus(col, letter) {
+		
+		if (letter === solution[col]) {
+			return '🟩' // in correct place in word
+		} else if (solution.indexOf(letter) > -1) {
+			return '🟨' // 1 // in word but in wrong place
+		} else {
+			return '⬛' //0 // not in word
+		}
+	}
 }

@@ -400,6 +400,10 @@ h4 {
 	flex: 1.5 !important;
 }
 
+.bg_secondary {
+	background-color: #4f4b60;
+}
+
 #foot {
 	display: flex;
     align-items: center;
