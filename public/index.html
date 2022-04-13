@@ -28,5 +28,13 @@
   <body>
     <noscript>Wordle Clone (JavaScript required).</noscript>
     <div id="root"></div>
+	<script>
+		if ("%NODE_ENV%" !== "development" && typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+			// __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+			for (let [key, value] of Object.entries(window.__REACT_DEVTOOLS_GLOBAL_HOOK__)) {
+				window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] = typeof value == "function" ? ()=>{} : null;
+			}
+		}
+	 </script>
   </body>
 </html>
