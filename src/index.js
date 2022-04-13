@@ -1,3 +1,4 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/App.css';

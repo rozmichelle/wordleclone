@@ -1,3 +1,6 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
+// This file is not cleaned up or sexy in any way. For educational purposes.
+
 import React, { useEffect, useState, useCallback, Fragment } from 'react'
 import {useParams, useNavigate} from "react-router-dom"
 import {dictionaries, isWord} from './utils/dictionary'
@@ -52,25 +55,24 @@ const Game = () => {
 	}
 	
 	const getInitialState = useCallback( (isNewRound = false, numletters = 5, hash = null) => {
-		//console.log('initializing...')
 		const nrows = numletters + 1; // always give one more guess than the # of letters in word
 		const g = initGrid(nrows, numletters)
 		
 		if (!hash) {
-			let w = initWord(numletters) // word length determines ncols
+			let w = initWord(numletters)
 			hash = encodeSolution(w)
 		}
 		
 		return {
 			gameLoaded: true,
 			grid: g,
-			winningHash: hash, // only store hash so the solution isn't visible in devtools (for the curious :)
+			winningHash: hash, // only store hash so the solution isn't visible in devtools
 			guessedLetters: new Set(),
-			ncols: numletters, // decodeSolution(hash).length,
+			ncols: numletters,
 			nrows: nrows,
 			currentRow: 0, // that user is on
 			currentCol: 0,
-			winningState: isNewRound ? 1 : 0 // -1: lost, 0: freshly loaded game, 1: new round, 2: won
+			winningState: isNewRound ? 1 : 0
 		}
 	}, [])
 	
@@ -86,7 +88,7 @@ const Game = () => {
 
 	const genRows = () => {
         function getRow(rowArr, rowIdx){
-			return <Row key={ rowIdx }
+			return <Row key = { rowIdx }
 					   letters = { rowArr }
 					   solutionHash = { winningHash }
 					   isSubmitted = { rowIdx < currentRow }
@@ -162,7 +164,6 @@ const Game = () => {
 
 			if (element) {
 				closeAlert('alert');
-//				element.style.display = 'block'
 				element.style.visibility = 'visible'
 				element.style.opacity = '1.0' 
 			}
@@ -176,7 +177,7 @@ const Game = () => {
 			if (element) {
 				closeAlert('alert');
 				element.style.visibility = 'visible'
-				element.style.opacity = '1.0'; // element.style.display = 'block';
+				element.style.opacity = '1.0';
 			}
 		}
 		
@@ -235,8 +236,7 @@ const Game = () => {
 				
 				// otherwise, letter typed. ensure it's a letter and not weird character
 				else if (newGrid[newRow][newCol] === '' 
-						 && letter.length 
-						 && letter.match(/^[a-z]$/i) ) 
+						 && letter.length && letter.match(/^[a-z]$/i) ) 
 				{ 
                     newGrid[newRow][newCol] = letter
 					newCol = (newCol === newGrid[0].length - 1) ? newCol : newCol + 1; 
@@ -305,12 +305,13 @@ const Game = () => {
 	
 	useEffect(() => {		
 		let urlparam = getUrlParam();
+		let path = '/wordle'
 		
 		if (urlparam && !gameLoaded) {
 			// prep to load game; first see if param is valid; otherwise, new game
 			let urlparamvalid = urlparam.match(/^[0-9a-z]+$/i)
 			if (!urlparamvalid) {
-				navigate('/wordle') // go to load game screen
+				navigate(path) // go to load game screen
 				return;
 			}
 
@@ -318,7 +319,7 @@ const Game = () => {
 			let len = word.length
 			
 			if ((len !== 5 && len !== 6) || !isWord(word, len)) {
-				navigate('/wordle') // go to load game screen
+				navigate(path) // go to load game screen
 				return;
 			}
 			
@@ -326,11 +327,11 @@ const Game = () => {
 			updateGameState(() => { return {...getInitialState(false, len, urlparam)} })
 		} else if (gameLoaded) {
 			// no url param; wait until game loaded to redirect to solution hash
-			navigate('/wordle/' + winningHash)
+			navigate(path + '/' + winningHash)
 		}
 		
 		// uncomment the following to print solution to console
-		// winningHash !== null && console.log("Solution: " + decodeSolution(winningHash))
+		 winningHash !== null && console.log("Solution: " + decodeSolution(winningHash))
 		
     }, [getUrlParam, gameLoaded, getInitialState, ncols, navigate, winningState, winningHash]);
 		

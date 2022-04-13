@@ -1,3 +1,6 @@
+# Welcome to My Wordle Clone
+To read about the development of this app, visit my [blog post](https://www.rozmichelle.com/react-game-desig…ecreating-wordle/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

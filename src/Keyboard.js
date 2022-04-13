@@ -1,13 +1,12 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
 import {decodeSolution} from './utils/helpers'
 
 // currentGuesses: array of currently submitted word guesses
+// winningHash: a hash of the solution
 // guessedLetters: set of all letters that have been guessed so far across all word guesses
 // buttonClicked: function in Game that handles the key clicked on this UI keyboard
 const Keyboard = ({ currentGuesses, winningHash, guessedLetters, buttonClicked }) => {	
 	let winningWord = decodeSolution(winningHash)
-//	let w = [].concat.apply([], currentGuesses);
-//	let x = new Set(w)
-//	console.log(x)
 	
 	const getLetterColor = (letter) => {
 		letter = letter.toLowerCase()
@@ -40,7 +39,7 @@ const Keyboard = ({ currentGuesses, winningHash, guessedLetters, buttonClicked }
 		} else if (!letterInWord) {
 			return 'key-fail';
 		} else {
-			return 'cell-guessed';
+			return 'key-default'; // shouldn't happen here
 		}
 	}
 	

@@ -1,3 +1,5 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
+
 const Cell = ({ letter, status }) => {
    const getClass = () => {
 	   let c = 'cell cell-'

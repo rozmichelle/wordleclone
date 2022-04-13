@@ -1,3 +1,5 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Game from './Game';

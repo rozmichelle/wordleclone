@@ -1,3 +1,4 @@
+// Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
 var Hashids = require("hashids");
 var Buffer = require('buffer/').Buffer
 
