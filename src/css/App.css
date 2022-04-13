@@ -37,6 +37,11 @@ h4 {
 	height: 40px;
 }
 
+.App-header h1 {
+	font-size: 1.4em;
+	color: #4f4b60;
+}
+
 .outside {
 	display: flex;
     justify-content: center;

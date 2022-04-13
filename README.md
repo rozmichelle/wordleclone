@@ -1,5 +1,5 @@
 # Welcome to My Wordle Clone
-To read about the development of this app, visit my [blog post](https://www.rozmichelle.com/react-game-desig…ecreating-wordle/).
+To read about the development of this app, visit my [blog post](https://www.rozmichelle.com/react-game-design-recreating-wordle/).
 
 # Getting Started with Create React App
 

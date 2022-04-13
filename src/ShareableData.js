@@ -1,6 +1,6 @@
 // Code by Roslyn Michelle Cyrus McConnell (rozmichelle.com)
 import React, { useState, Fragment } from 'react'
-import {decodeSolution, getShareableData} from './utils/helpers'
+import {decodeSolution, getShareableData, appRoot} from './utils/helpers'
 
 const ShareableData = ({ guesses, solutionHash, nrows }) => {
 	const [resultsCopied, updatedResultsCopied] = useState(false)
@@ -8,7 +8,7 @@ const ShareableData = ({ guesses, solutionHash, nrows }) => {
 	let dataRows = getShareableData(guesses, decodeSolution(solutionHash))
 
 	const copyData = (dataRows) => {
-		let str = 'Wordle ' + solutionHash + ' ' + dataRows.length + '/' + nrows + '\n'
+		let str = 'Wordle ' + dataRows.length + '/' + nrows + ' ' + appRoot + solutionHash + '\n'
 		
 		dataRows.map((row, _) => {
 			row.map((val, _) => {

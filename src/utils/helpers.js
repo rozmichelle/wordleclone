@@ -4,6 +4,8 @@ var Buffer = require('buffer/').Buffer
 
 const hashids = new Hashids("Wordle for the WIN!")
 
+export const appRoot = 'https://www.rozmichelle.com/wordle/'
+
 export const encodeSolution = (word) => {
 	let hex = Buffer.from(word, 'utf8').toString('hex')
 	let hash = hashids.encodeHex(hex)
